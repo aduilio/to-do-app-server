@@ -105,6 +105,13 @@ class TaskService(
         return taskMapper.mapReadTaskDtoFrom(task)
     }
 
+    /**
+     * Deletes all completed tasks.
+     */
+    fun deleteCompletedTasks() {
+        taskRepository.deleteByCompleted()
+    }
+
     private fun readTask(id: Long): Task {
         return taskRepository.findById(id)
             .orElseThrow { NotFoundException(NOT_FOUND_MESSAGE) }

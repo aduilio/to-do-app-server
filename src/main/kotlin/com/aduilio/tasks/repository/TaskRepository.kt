@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository
  */
 interface TaskRepository : JpaRepository<Task, Long> {
 
+    fun deleteByCompleted(completed: Boolean = true)
+
 }

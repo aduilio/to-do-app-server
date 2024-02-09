@@ -20,9 +20,13 @@ import org.springframework.web.util.UriComponentsBuilder
 @RequestMapping("/tasks")
 class TaskController(private val taskService: TaskService) {
 
+    companion object {
+        const val CACHE_TASKS_KEY = "tasks"
+    }
+
     @PostMapping
     @Transactional
-    @CacheEvict(value = ["tasks"], allEntries = true)
+    @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
     fun create(
         @Valid @RequestBody createTaskDto: CreateTaskDto,
         componentsBuilder: UriComponentsBuilder
@@ -35,7 +39,7 @@ class TaskController(private val taskService: TaskService) {
 
     @PatchMapping("/{id}")
     @Transactional
-    @CacheEvict(value = ["tasks"], allEntries = true)
+    @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
     fun update(@PathVariable id: Long, @RequestBody @Valid updateTaskDto: UpdateTaskDto): ResponseEntity<ReadTaskDto> {
         val task = taskService.update(id, updateTaskDto)
 
@@ -43,7 +47,7 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @GetMapping
-    @Cacheable("tasks")
+    @Cacheable(CACHE_TASKS_KEY)
     fun list(): ResponseEntity<List<ReadTaskDto>> {
         val topics = taskService.list()
 
@@ -58,7 +62,8 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(value = ["tasks"], allEntries = true)
+    @Transactional
+    @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) {
         taskService.delete(id)
@@ -66,10 +71,18 @@ class TaskController(private val taskService: TaskService) {
 
     @PostMapping("/{id}/completed")
     @Transactional
-    @CacheEvict(value = ["tasks"], allEntries = true)
+    @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
     fun complete(@PathVariable id: Long): ResponseEntity<ReadTaskDto> {
         val task = taskService.complete(id)
 
         return ResponseEntity.ok(task)
+    }
+
+    @DeleteMapping("/completed")
+    @Transactional
+    @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteCompletedTasks() {
+        taskService.deleteCompletedTasks()
     }
 }
