@@ -84,13 +84,13 @@ Response: 200 OK
 }
 ```
 
-## **DELETE /task/{id}**
+## **DELETE /tasks/{id}**
 
 Delete a task.
 
 Response: 204 NO CONTENT
 
-## **POST /task/{id}/completed**
+## **POST /tasks/{id}/completed**
 
 Mark a task as completed.
 
@@ -106,7 +106,7 @@ Response: 200 OK
 }
 ```
 
-## **DELETE /task/completed
+## **DELETE /tasks/completed**
 
 Delete all completed tasks.
 
