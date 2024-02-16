@@ -1,0 +1,10 @@
+server:
+  error:
+    include-stacktrace: never
+spring:
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    com.aduilio.tasks: debug
