@@ -4,6 +4,9 @@ import com.aduilio.tasks.dto.CreateTaskDto
 import com.aduilio.tasks.dto.ReadTaskDto
 import com.aduilio.tasks.dto.UpdateTaskDto
 import com.aduilio.tasks.service.TaskService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.cache.annotation.CacheEvict
@@ -24,6 +27,12 @@ class TaskController(private val taskService: TaskService) {
         const val CACHE_TASKS_KEY = "tasks"
     }
 
+    @Operation(summary = "Creates a task")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "201", description = "Task created successfully")
+        ]
+    )
     @PostMapping
     @Transactional
     @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
@@ -37,6 +46,13 @@ class TaskController(private val taskService: TaskService) {
         return ResponseEntity.created(uri).body(task)
     }
 
+    @Operation(summary = "Updates a task")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task updated successfully"),
+            ApiResponse(responseCode = "404", description = "Task not found")
+        ]
+    )
     @PatchMapping("/{id}")
     @Transactional
     @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
@@ -46,6 +62,12 @@ class TaskController(private val taskService: TaskService) {
         return ResponseEntity.ok(task)
     }
 
+    @Operation(summary = "Returns all tasks")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Tasks read successfully")
+        ]
+    )
     @GetMapping
     @Cacheable(CACHE_TASKS_KEY)
     fun list(): ResponseEntity<List<ReadTaskDto>> {
@@ -54,6 +76,13 @@ class TaskController(private val taskService: TaskService) {
         return ResponseEntity.ok(topics)
     }
 
+    @Operation(summary = "Returns a task details")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task read successfully"),
+            ApiResponse(responseCode = "404", description = "Task not found")
+        ]
+    )
     @GetMapping("/{id}")
     fun read(@PathVariable id: Long): ResponseEntity<ReadTaskDto> {
         val topic = taskService.read(id)
@@ -61,6 +90,13 @@ class TaskController(private val taskService: TaskService) {
         return ResponseEntity.ok(topic)
     }
 
+    @Operation(summary = "Deletes a task")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "204", description = "Task deleted successfully"),
+            ApiResponse(responseCode = "404", description = "Task not found")
+        ]
+    )
     @DeleteMapping("/{id}")
     @Transactional
     @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
@@ -69,6 +105,13 @@ class TaskController(private val taskService: TaskService) {
         taskService.delete(id)
     }
 
+    @Operation(summary = "Sets a task as completed")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task updated successfully"),
+            ApiResponse(responseCode = "404", description = "Task not found")
+        ]
+    )
     @PostMapping("/{id}/completed")
     @Transactional
     @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)
@@ -78,6 +121,12 @@ class TaskController(private val taskService: TaskService) {
         return ResponseEntity.ok(task)
     }
 
+    @Operation(summary = "Deletes all completed tasks")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "204", description = "All completed tasks deleted successfully")
+        ]
+    )
     @DeleteMapping("/completed")
     @Transactional
     @CacheEvict(value = [CACHE_TASKS_KEY], allEntries = true)

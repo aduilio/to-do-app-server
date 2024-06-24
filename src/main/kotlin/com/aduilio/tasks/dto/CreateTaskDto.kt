@@ -1,13 +1,14 @@
 package com.aduilio.tasks.dto
 
+import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.NotEmpty
 import java.time.LocalDate
 import java.time.LocalTime
 
 /**
  * Represents the request to create a topic.
  */
+@Schema(description = "Model to create a task")
 data class CreateTaskDto(
     @field:NotBlank (message = "The title is required")
     val title: String?,
