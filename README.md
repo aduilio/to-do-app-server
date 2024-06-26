@@ -1,6 +1,7 @@
 [![Build Status](https://ci-cd.springdoc.org:8443/buildStatus/icon?job=springdoc-demos%2F2.x)](https://ci-cd.springdoc.org:8443/job/springdoc-demos/job/2.x/)
 
 # To-Do App Server
+After running the application, the documentation is available on http://localhost:8080/swagger-ui/index.html#/.
 
 ## **POST /tasks**
 
