@@ -3,6 +3,13 @@
 # To-Do App Server
 After running the application, the documentation is available on http://localhost:8080/swagger-ui/index.html#/.
 
+To access the H2 database console: 
+- URL: http://localhost:8080/h2
+- Username: sa
+- Password:
+
+A file named ToDoAppDB will be created on the user folder (~).
+
 ## **POST /tasks**
 
 Create a task.
