@@ -1,7 +1,21 @@
 [![Build Status](https://ci-cd.springdoc.org:8443/buildStatus/icon?job=springdoc-demos%2F2.x)](https://ci-cd.springdoc.org:8443/job/springdoc-demos/job/2.x/)
 
 # To-Do App Server
-After running the application, the documentation is available on http://localhost:8080/swagger-ui/index.html#/.
+
+## Running the application
+
+You can run directly on the IDE as a Spring Boot application.
+It is possible to run using the Maven command: *mvn spring-boot:run*.
+
+## Running using Docker
+
+Build the image using the command: *docker build -t posinatel/todoappserver .* (pay attention the dot in the end of the command)
+
+Check the image using the command: *docker images*
+
+Run the application using the command: *docker run -p 8080:8080 -t posinatel/todoappserver*
+
+## H2 Database
 
 To access the H2 database console: 
 - URL: http://localhost:8080/h2
@@ -9,6 +23,10 @@ To access the H2 database console:
 - Password:
 
 A file named ToDoAppDB will be created on the user folder (~).
+
+## Swagger Documentation
+
+After running the application, the documentation is available on http://localhost:8080/swagger-ui/index.html#/.
 
 ## **POST /tasks**
 
