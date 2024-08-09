@@ -22,7 +22,7 @@ To access the H2 database console:
 - Username: sa
 - Password:
 
-A file named ToDoAppDB will be created on the user folder (~).
+A file named *database* will be created on the folder *~/.ToDoApp/database*.
 
 ## Swagger Documentation
 

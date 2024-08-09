@@ -3,7 +3,7 @@ server:
     include-stacktrace: never
 spring:
   datasource:
-    url: jdbc:h2:file:~/ToDoAppDB
+    url: jdbc:h2:file:~/.ToDoApp/database
     driver-class-name: org.h2.Driver
     username: sa
     password:
