@@ -112,7 +112,11 @@ class TaskService(
     fun delete(id: Long) {
         logger.debug { "Deleting the task with id: $id" }
 
-        taskRepository.deleteById(id)
+        if (taskRepository.existsById(id)) {
+            taskRepository.deleteById(id)
+        } else {
+            throw NotFoundException(NOT_FOUND_MESSAGE)
+        }
 
         logger.debug { "Task with id: $id deleted" }
     }
