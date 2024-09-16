@@ -7,6 +7,8 @@
 You can run directly on the IDE as a Spring Boot application.
 It is possible to run using the Maven command: *mvn spring-boot:run*.
 
+Run using the jar file: *java -jar bin/application.jar*.
+
 ## Running using Docker
 
 Build the image using the command: *docker build -t posinatel/todoappserver .* (pay attention the dot in the end of the command)
