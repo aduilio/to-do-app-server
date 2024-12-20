@@ -1,4 +1,4 @@
-[![Build Status](https://ci-cd.springdoc.org:8443/buildStatus/icon?job=springdoc-demos%2F2.x)](https://ci-cd.springdoc.org:8443/job/springdoc-demos/job/2.x/)
+[![Build](https://github.com/aduilio/to-do-app-server/actions/workflows/build.yml/badge.svg)](https://github.com/aduilio/to-do-app-server/actions/workflows/build.yml)
 
 # To-Do App Server
 
